@@ -7,13 +7,9 @@ const NavBar = () => {
       >
         <div className="flex lg:flex-1">
           <a href="#" className="-m-1.5 p-1.5">
-            <span className="sr-only">Your Company</span>
-            <img
-              className="h-8 w-auto"
-              src="images\logo.png"
-              alt=""
-            ></img>
+            <img className="h-8 w-auto" src="images\logo.png" alt=""></img>
           </a>
+          <span className="text-xl ml-4 text-center font-bold tracking-tight sm:text-2xl text-indigo-600">InterLearn</span>
         </div>
 
         <div className="hidden lg:flex lg:gap-x-12">
