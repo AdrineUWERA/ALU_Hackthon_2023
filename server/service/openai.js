@@ -6,13 +6,18 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export const searchEngine = async (prompt) => {
-    const response = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt,
-      temperature: 0.2,
-      max_tokens: 2048
-    });
-    return response
+try {
+      const response = await openai.createCompletion({
+        model: "text-davinci-003",
+        prompt,
+        temperature: 0.2,
+        max_tokens: 2048
+      });
+      return response
+} catch (error) {
+  console.log(error);
+  
+}
 }
 
 export const chatEngine = async (messages) => {

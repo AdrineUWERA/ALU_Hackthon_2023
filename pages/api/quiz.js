@@ -3,15 +3,14 @@ import { prisma } from "../../server/helpers/prisma";
 import { searchEngine } from "../../server/service/openai";
 
 export default async function handler(req, res) {
-  if (req.method == "GET") {
-    const data = await prisma.subTopic.findMany();
-    res.status(200).json(data);
-  } else if (req.method == "POST") {
+  if (req.method == "POST") {
     try {
-      const { search } = req.body;
-      const result = await searchEngine(search);
+      const { topic } = req.body;
+      const modelPrompt = `Create a 5 multiple choice questions quiz based on these topics and return in json format: ${topic}`;
+
+      const result = await searchEngine(modelPrompt);
       console.log(result.data.choices[0]);
-      return res.status(200).json(result.data.choices[0]);
+      return res.status(200).json(JSON.parse(result.data.choices[0].text));
     } catch (error) {
       return res.status(500).json(error);
     }
