@@ -11,7 +11,25 @@ datasource db {
 }
 
 
-model Questions {
+model Course {
    id String @id @default(auto()) @map("_id") @db.ObjectId
    name String
+   topics Topic[]
+}
+
+model Topic {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  description String
+  subTopics SubTopic[]
+  course Course @relation(references: [id], fields: [courseId])
+  courseId String @db.ObjectId
+}
+
+model SubTopic {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  content String
+  topic Topic @relation(references: [id], fields: [topicId])
+  topicId String @db.ObjectId
 }
