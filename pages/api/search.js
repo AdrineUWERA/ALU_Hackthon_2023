@@ -4,11 +4,7 @@ import { searchEngine } from '../../server/service/openai';
 
 export default async function handler(req, res) {
   if(req.method == 'GET') {
-    const data = await prisma.questions.create({
-     data: {
-      name: "testing2" 
-     }
-    })
+    const data = await prisma.subTopic.findMany();
     res.status(200).json(data)
   } else if(req.method == 'POST') {
     try {

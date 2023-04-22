@@ -11,17 +11,6 @@ async function main() {
 
     // insert data
     for(const course of courses) {
-        console.log(course.topics.forEach(topic => {
-            return {
-                name: topic.name,
-                description: topic.description,
-                subTopics: {
-                    create: [
-                        ...topic.subTopics
-                    ]
-                }
-            }
-        }),)
         await prisma.course.create({
             data: {
                 name: course.name,

@@ -22,7 +22,7 @@ model Topic {
   name String
   description String
   subTopics SubTopic[]
-  course Course @relation(references: [id], fields: [courseId])
+  course Course @relation(references: [id], fields: [courseId], onDelete: Cascade)
   courseId String @db.ObjectId
 }
 
@@ -30,6 +30,6 @@ model SubTopic {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   title String
   content String
-  topic Topic @relation(references: [id], fields: [topicId])
+  topic Topic @relation(references: [id], fields: [topicId], onDelete: Cascade)
   topicId String @db.ObjectId
 }

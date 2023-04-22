@@ -4,6 +4,7 @@ const configuration = new Configuration({
   apiKey: process.env.GPT_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
+
 export const searchEngine = async (prompt) => {
     const response = await openai.createCompletion({
       model: "text-davinci-003",
@@ -15,13 +16,18 @@ export const searchEngine = async (prompt) => {
 }
 
 export const chatEngine = async (messages) => {
-  const response = await openai.createChatCompletion({
-    model: "text-davinci-003",
-    messages,
-    temperature: 0.2,
-    max_tokens: 2048
-  });
-  return response
+    try {
+        
+        const response = await openai.createChatCompletion({
+          model: "gpt-3.5-turbo",
+          messages,
+          temperature: 0.2,
+          max_tokens: 2048
+        });
+        return response
+    } catch (error) {
+        return error
+    }
 }
 
 export const contentGenerationEngine = async (topic, level) => {
