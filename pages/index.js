@@ -1,14 +1,17 @@
-// import Head from 'next/head'
-// import Image from 'next/image' 
-import React from 'react';
-import NavBar from '../src/components/Navbar';
-import CourseMenu from '../src/components/CourseMenu';
-
+import React from "react";
+import NavBar from "../src/components/Navbar";
+import HeroSection from "../src/components/HeroSection";
+import Features from "../src/components/FeatureSection";
+import Testimonials from '../src/components/Testimonials'
+import Footer from "../src/components/Footer";
 export default function Home() {
-  return (
+  return ( 
     <React.Fragment>
       <NavBar/>
-      <CourseMenu/>
-    </React.Fragment>   
-  )
+      <HeroSection/>
+      <Features/>
+      <Testimonials/>
+      <Footer/>
+    </React.Fragment>
+  );
 }
