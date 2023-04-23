@@ -1,4 +1,4 @@
-import '../styles/output.css'
+import '../styles/output.css';
 
 function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />
