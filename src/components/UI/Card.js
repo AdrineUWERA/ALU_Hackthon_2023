@@ -1,3 +1,4 @@
+import Link from "next/link";
 
 const Card = ({ imageUrl, title, description }) => {
   let shortDescription;
@@ -16,9 +17,9 @@ const Card = ({ imageUrl, title, description }) => {
         </p>
       </div>
       <div className="px-6 pb-4">
-        <a href="/learn/artificial-intelligence" className="text-indigo-600 font-medium text-xs mb-2">
+        <Link href="/learn/artificial-intelligence" className="text-indigo-600 font-medium text-xs mb-2">
           Open course <span aria-hidden="true">&rarr;</span>
-        </a>
+        </Link>
       </div>
     </div>
   );
