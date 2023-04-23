@@ -3,41 +3,54 @@ import { useState, useEffect } from "react";
 const QuizComponent = () => {
   const quizQstns = [
     {
-      question: "What type of framework is Next.js?",
-      answerOptions: [
-        { answer: "Frontend" },
-        { answer: "Backend" },
-        { answer: "FullStack", isCorrect: true },
-        { answer: "None of the above" },
-      ],
+      question: "What is the scientific name for the common housefly?",
+      options: {
+        a: "Musca domestica",
+        b: "Apis mellifera",
+        c: "Drosophila melanogaster",
+        d: "Bombyx mori",
+      },
+      answer: "a",
     },
     {
-      question: "When was Next.js released?",
-      answerOptions: [
-        { answer: "20 September 2019" },
-        { answer: "14 January 2017" },
-        { answer: "25 October 2016", isCorrect: true },
-        { answer: "28 March 2018" },
-      ],
+      question: "What is the scientific name for the human species?",
+      options: {
+        a: "Homo sapiens",
+        b: "Pan troglodytes",
+        c: "Canis lupus",
+        d: "Felis catus",
+      },
+      answer: "a",
     },
     {
-      question: "Which CSS Framework are we using?",
-      answerOptions: [
-        { answer: "Bootstrap" },
-        { answer: "TailwindCSS", isCorrect: true },
-        { answer: "Chakra UI" },
-        { answer: "Bulma CSS" },
-      ],
+      question: "What is the scientific name for the common dog?",
+      options: {
+        a: "Canis lupus",
+        b: "Homo sapiens",
+        c: "Felis catus",
+        d: "Pan troglodytes",
+      },
+      answer: "a",
     },
     {
-      question:
-        "Which class in Tailwind is used to set flex direction of column?",
-      answerOptions: [
-        { answer: "col" },
-        { answer: "col-flex" },
-        { answer: "flex-col", isCorrect: true },
-        { answer: "None of the above" },
-      ],
+      question: "What is the scientific name for the common cat?",
+      options: {
+        a: "Canis lupus",
+        b: "Homo sapiens",
+        c: "Felis catus",
+        d: "Pan troglodytes",
+      },
+      answer: "c",
+    },
+    {
+      question: "What is the scientific name for the common honey bee?",
+      options: {
+        a: "Musca domestica",
+        b: "Apis mellifera",
+        c: "Drosophila melanogaster",
+        d: "Bombyx mori",
+      },
+      answer: "b",
     },
   ];
 
@@ -53,53 +66,52 @@ const QuizComponent = () => {
   const [questions, setQuestions] = useState(null);
 
   useEffect(() => {
-    fetch("/api/quiz", {
-      method: "POST",
-      body: {
-        "topic": "biology",
-      },
-    })
-      .then((response) => {
-        // console.log(response.json());
-        setQuestions(response.json());
-      })
-      // .then((response) => {
-        
-      // })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    fetchData();
   }, []);
 
-console.log(questions);
-  // const stns = await fetch(
-  //   "http://localhost:3000/api/quiz",
-  //   {
-  //     method: "POST",
-  //     body: data
-  //   }
-  // );
+  const fetchData = async () => {
+    const result = await fetch("http://localhost:3000/api/quiz", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        topic: "biology",
+      }),
+    });
+    const json = await result.json();
+    console.log(json);
+    setQuestions(json);
+    console.log(questions);
+  };
 
   const handleSubmitButton = () => {
     if (selectedOptions[currentQuestion]) {
       setShowError(false);
       if (
-        quizQstns[currentQuestion].answerOptions.some(
-          (obj) => obj.answer === selectedOptions[currentQuestion].answerByUser
+        Object.values(quizQstns[currentQuestion].options).includes(
+          selectedOptions[currentQuestion].answerByUser
         )
-        // quizQstns[currentQuestion].answerOptions.includes({
-        //   answer: selectedOptions[currentQuestion],
-        // })
       ) {
         let newScore = 0;
+        console.log("end opt", selectedOptions);
+        console.log(
+          "array to map",
+          Object.values(quizQstns[currentQuestion].options)[0]
+        );
+        console.log("ans", selectedOptions[0].answerByUser);
         for (let i = 0; i < quizQstns.length; i++) {
-          quizQstns[i].answerOptions.map(
-            (answer) =>
-              answer.isCorrect &&
-              answer.answer === selectedOptions[i]?.answerByUser &&
-              (newScore += 1)
-          );
+          if (
+            quizQstns[i].options[quizQstns[i].answer] ===
+            selectedOptions[i].answerByUser
+          ) {
+            newScore += 1;
+          }
+          console.log("selctedd", selectedOptions[i].answerByUser);
+          console.log("totalll", newScore);
         }
+        console.log("total", newScore);
         setScore(newScore);
         setShowScore(true);
       }
@@ -112,7 +124,7 @@ console.log(questions);
       (selectedOptions[currentQuestion] = { answerByUser: answer }),
     ]);
     setSelectedOptions([...selectedOptions]);
-    console.log(selectedOptions);
+    // console.log(selectedOptions);
   };
 
   const handlePrevious = () => {
@@ -121,24 +133,17 @@ console.log(questions);
   };
 
   const handleNext = () => {
-    // console.log("selected options",selectedOptions[currentQuestion])
-    // console.log("this", quizQstns[currentQuestion].answerOptions, {
-    //   answer: selectedOptions[currentQuestion].answerByUser,
-    // });
-    // console.log(quizQstns[currentQuestion].answerOptions.some(obj => obj.answer === selectedOptions[currentQuestion].answerByUser))
     if (selectedOptions[currentQuestion]) {
       setShowError(false);
       if (
-        quizQstns[currentQuestion].answerOptions.some(
-          (obj) => obj.answer === selectedOptions[currentQuestion].answerByUser
+        Object.values(quizQstns[currentQuestion].options).includes(
+          selectedOptions[currentQuestion].answerByUser
         )
-        // quizQstns[currentQuestion].answerOptions.includes({
-        //   answer: selectedOptions[currentQuestion],
-        // })
       ) {
+        // console.log("select",selectedOptions)
         const nextQues = currentQuestion + 1;
         nextQues < quizQstns.length && setCurrentQuestion(nextQues);
-        console.log("currentQuestion", currentQuestion);
+        // console.log("currentQuestion", currentQuestion);
       }
     } else {
       setShowError(true);
@@ -180,26 +185,27 @@ console.log(questions);
             )}
           </div>
           <div className="flex flex-col w-full">
-            {quizQstns[currentQuestion].answerOptions.map((answer, index) => (
-              <div
-                key={index}
-                className="flex items-center w-full py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer border-black/10 rounded-xl bg-white"
-                onClick={(e) => handleAnswerOption(answer.answer)}
-              >
-                <input
-                  type="radio"
-                  name={answer.answer}
-                  value={answer.answer}
-                  checked={
-                    answer.answer ===
-                    selectedOptions[currentQuestion]?.answerByUser
-                  }
-                  onChange={(e) => handleAnswerOption(answer.answer)}
-                  className="w-4 h-4 bg-black"
-                />
-                <p className="ml-6 text-black text-sm">{answer.answer}</p>
-              </div>
-            ))}
+            {Object.values(quizQstns[currentQuestion].options).map(
+              (answer, index) => (
+                <div
+                  key={index}
+                  className="flex items-center w-full py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer border-black/10 rounded-xl bg-white"
+                  onClick={(e) => handleAnswerOption(answer)}
+                >
+                  <input
+                    type="radio"
+                    name={answer}
+                    value={answer}
+                    checked={
+                      answer === selectedOptions[currentQuestion]?.answerByUser
+                    }
+                    onChange={(e) => handleAnswerOption(answer)}
+                    className="w-4 h-4 bg-black"
+                  />
+                  <p className="ml-6 text-black text-sm">{answer}</p>
+                </div>
+              )
+            )}
           </div>
           <div className="flex justify-between w-full mt-12 text-white">
             <button
