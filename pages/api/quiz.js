@@ -9,9 +9,10 @@ export default async function handler(req, res) {
       const modelPrompt = `Create a 5 multiple choice questions quiz based on these topics and return in json format: ${topic}`;
 
       const result = await searchEngine(modelPrompt);
-      console.log(result.data.choices[0]);
-      return res.status(200).json(JSON.parse(result.data.choices[0].text));
+      // console.log(result.data.choices[0]);
+      return res.status(200).json(JSON.parse(`${result.data.choices[0].text}`));
     } catch (error) {
+      console.log(error);
       return res.status(500).json(error);
     }
   } else {
