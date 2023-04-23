@@ -8,8 +8,8 @@ const Card = ({ imageUrl, title, description }) => {
     shortDescription = description;
   }
   return (
-    <div className="w-56 bg-white rounded rounded-lg overflow-hidden shadow-lg">
-      <img class="w-full" src={imageUrl} alt={title}></img>
+    <div className="w-64 bg-white rounded rounded-lg overflow-hidden shadow-lg">
+      <img className="w-full" src={imageUrl} alt={title}></img>
       <div className="px-6 py-4">
         <div className="font-bold text-sm mb-2">{title}</div>
         <p className="text-gray-700 text-xs">

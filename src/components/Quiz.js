@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
 import LoadingAnimation from './UI/LoadingAnimation';
+import { useRouter } from "next/router";
 
 const QuizComponent = () => {
+  const router = useRouter();
+  let title = "Intro to AI";
+  if (router.query.title) {
+    title = router.query.title.split("-").join(" ");
+  } 
+  console.log('title',title);
+
   const quizQstns = [
     {
       question: "What is the scientific name for the common housefly?",
@@ -78,7 +86,7 @@ const QuizComponent = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        topic: "biology",
+        topic: title,
       }),
     });
     const json = await result.json();
@@ -172,7 +180,7 @@ const QuizComponent = () => {
           </h1>
           <div className="mt-10 flex items-center justify-center gap-x-6">
               <a
-                href="/learn"
+                href="/learn/courseContent"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Back to content <span aria-hidden="true">←</span>
