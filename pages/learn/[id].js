@@ -1,12 +1,22 @@
-import Link from 'next/link'
-import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import Chatbot from 'react-chatbot-kit';
+import 'react-chatbot-kit/build/main.css';
+import { FaRobot } from 'react-icons/fa';
+import ActionProvider from "../../src/chatbot/actionProvider";
+import config from "../../src/chatbot/config";
+import MessageParser from "../../src/chatbot/messageParser";
 
 
 const courseContent = () => {
-
+    const [showBot, setShowBot] = React.useState(false);
     const [course, setCourse] = useState(null);
     const [content, setContent] = useState(null);
     const [contentTitle, setContentTitle] = useState(null);
+    const router = useRouter();
+
+    const id = router.query.id;
+    console.log("id ", router.query)
 
 
     useEffect(() => {
@@ -14,7 +24,7 @@ const courseContent = () => {
       }, []);
 
     const fetchData = async () => {
-        const result = await fetch('http://localhost:3000/api/content/64447b33f68eb82f01b7a3f6');
+        const result = await fetch(`http://localhost:3000/api/content/${id}`);
         const json = await result.json();
         setCourse(json);
     };
@@ -165,6 +175,17 @@ const [selectedTopic, setSelectedTopic] = useState(0);
                                       </div>
                                   </div>
                               </div>
+                              {showBot && <div className='fixed right-12 bottom-[114px]'>
+        <Chatbot
+        config={config}
+        messageParser={MessageParser}
+        actionProvider={ActionProvider}
+      />
+        </div>}
+
+        <div className='w-50 h-50 rounded-full bg-black p-4 fixed right-12 bottom-12 cursor-pointer' onClick={() => setShowBot(!showBot)}>
+          <FaRobot className='text-white text-3xl'/>
+        </div>
                       </div>
                   </>):(
         <p>Loading data...</p>

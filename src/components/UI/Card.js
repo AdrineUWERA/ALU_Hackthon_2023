@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Card = ({ imageUrl, title, description }) => {
+const Card = ({ imageUrl, title, description, link }) => {
   let shortDescription;
   if (description.split(" ").length > 100) {
     shortDescription = description.substring(0, 100) + " ...";
@@ -17,7 +17,7 @@ const Card = ({ imageUrl, title, description }) => {
         </p>
       </div>
       <div className="px-6 pb-4">
-        <Link href="/learn/artificial-intelligence" className="text-indigo-600 font-medium text-xs mb-2">
+        <Link href={`/learn/${link}`} className="text-indigo-600 font-medium text-xs mb-2">
           Open course <span aria-hidden="true">&rarr;</span>
         </Link>
       </div>
