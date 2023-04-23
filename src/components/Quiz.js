@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import LoadingAnimation from './UI/LoadingAnimation';
 
 const QuizComponent = () => {
   const quizQstns = [
@@ -90,7 +91,7 @@ const QuizComponent = () => {
     if (selectedOptions[currentQuestion]) {
       setShowError(false);
       if (
-        Object.values(quizQstns[currentQuestion].options).includes(
+        Object.values(questions[currentQuestion].options).includes(
           selectedOptions[currentQuestion].answerByUser
         )
       ) {
@@ -98,12 +99,12 @@ const QuizComponent = () => {
         console.log("end opt", selectedOptions);
         console.log(
           "array to map",
-          Object.values(quizQstns[currentQuestion].options)[0]
+          Object.values(questions[currentQuestion].options)[0]
         );
         console.log("ans", selectedOptions[0].answerByUser);
-        for (let i = 0; i < quizQstns.length; i++) {
+        for (let i = 0; i < questions.length; i++) {
           if (
-            quizQstns[i].options[quizQstns[i].answer] ===
+            questions[i].options[questions[i].answer] ===
             selectedOptions[i].answerByUser
           ) {
             newScore += 1;
@@ -136,13 +137,13 @@ const QuizComponent = () => {
     if (selectedOptions[currentQuestion]) {
       setShowError(false);
       if (
-        Object.values(quizQstns[currentQuestion].options).includes(
+        Object.values(questions[currentQuestion].options).includes(
           selectedOptions[currentQuestion].answerByUser
         )
       ) {
         // console.log("select",selectedOptions)
         const nextQues = currentQuestion + 1;
-        nextQues < quizQstns.length && setCurrentQuestion(nextQues);
+        nextQues < questions.length && setCurrentQuestion(nextQues);
         // console.log("currentQuestion", currentQuestion);
       }
     } else {
@@ -151,7 +152,7 @@ const QuizComponent = () => {
   };
 
   return (
-    <div className="my-20 mx-[50px] max-w-full">
+    <div className="my-20 mx-[100px] max-w-full">
       <div
         className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         aria-hidden="true"
@@ -167,25 +168,33 @@ const QuizComponent = () => {
       {showScore ? (
         <div className="flex flex-col justify-center min-h-screen place-items-center items-center">
           <h1 className="text-3xl font-semibold text-center text-black">
-            You scored {score} out of {quizQstns.length}
+            You scored {score} out of {questions.length}
           </h1>
-          <a href="/learn/content">Back to content</a>
+          <div className="mt-10 flex items-center justify-center gap-x-6">
+              <a
+                href="/learn"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Back to content <span aria-hidden="true">←</span>
+              </a>
+            </div>
         </div>
       ) : (
+        questions ? (
         <div className="flex flex-col justify-center items-center">
           <div className="flex flex-col items-start w-full">
             <h4 className="mt-10 text-base text-black/60">
-              Question {currentQuestion + 1} of {quizQstns.length}
+              Question {currentQuestion + 1} of {questions.length}
             </h4>
             <div className="my-4 text-xl text-black font-semibold">
-              {quizQstns[currentQuestion].question}
+              {questions[currentQuestion].question}
             </div>
             {showError && (
               <p className="pl-4 pb-4 text-red-500 "> * Choose an answer!</p>
             )}
           </div>
           <div className="flex flex-col w-full">
-            {Object.values(quizQstns[currentQuestion].options).map(
+            {Object.values(questions[currentQuestion].options).map(
               (answer, index) => (
                 <div
                   key={index}
@@ -216,16 +225,16 @@ const QuizComponent = () => {
             </button>
             <button
               onClick={
-                currentQuestion + 1 === quizQstns.length
+                currentQuestion + 1 === questions.length
                   ? handleSubmitButton
                   : handleNext
               }
               className="w-[49%] py-3 bg-indigo-600 rounded-lg"
             >
-              {currentQuestion + 1 === quizQstns.length ? "Submit" : "Next"}
+              {currentQuestion + 1 === questions.length ? "Submit" : "Next"}
             </button>
           </div>
-        </div>
+        </div>): (<LoadingAnimation/>)
       )}
     </div>
   );
