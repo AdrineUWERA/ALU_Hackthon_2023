@@ -1,7 +1,47 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from 'next/link';
+import React from 'react';
+import Chatbot from 'react-chatbot-kit';
+import 'react-chatbot-kit/build/main.css';
+import { FaRobot } from 'react-icons/fa';
+import ActionProvider from "../../src/chatbot/actionProvider";
+import config from "../../src/chatbot/config";
+import MessageParser from "../../src/chatbot/messageParser";
+import { socketContext } from '../../src/context/context';
+
 
 const courseMaterial = () => {
+  const [showBot, setShowBot] = React.useState(false);
+  const ws = React.useContext(socketContext);
+  const sendMessage = async () => {
+    try {
+      const response = await fetch('/api/socket')
+      const data = await response.json();
+      return data;
+
+    } catch (error) {
+      console.warn(error)
+    }
+  }
+  // React.useEffect(() => {
+  //   sendMessage().then(() => {
+  //     const socket = io();
+      
+  //     socket.on("connect", () => {
+  //       console.log("WebSocket connected");
+        
+  //       // Send message to server
+  //       socket.send("Hello, server!");
+  //     });
+  
+  //     socket.on("message", (message) => {
+  //       console.log(`Received message: ${message}`);
+        
+  //     });
+
+  //   }).catch(error => console.log(error))
+
+  // }, []);
+
   return (
     <div className='container mx-auto py-20 flex flex-col items-center min-h-screen relative'>
         <div
@@ -38,6 +78,17 @@ const courseMaterial = () => {
 
         </div>
         
+        {showBot && <div className='fixed right-12 bottom-[114px]'>
+        <Chatbot
+        config={config}
+        messageParser={MessageParser}
+        actionProvider={ActionProvider}
+      />
+        </div>}
+
+        <div className='w-50 h-50 rounded-full bg-black p-4 fixed right-12 bottom-12 cursor-pointer' onClick={() => setShowBot(!showBot)}>
+          <FaRobot className='text-white text-3xl'/>
+        </div>
 
     </div>
   )

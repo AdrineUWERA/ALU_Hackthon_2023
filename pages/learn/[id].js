@@ -1,94 +1,107 @@
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from "react";
+import Chatbot from 'react-chatbot-kit';
+import 'react-chatbot-kit/build/main.css';
+import { FaRobot } from 'react-icons/fa';
+import ActionProvider from "../../src/chatbot/actionProvider";
+import config from "../../src/chatbot/config";
+import MessageParser from "../../src/chatbot/messageParser";
+import LoadingAnimation from "../../src/components/UI/LoadingAnimation";
 
-const courseContent = () => {
-  const [course, setCourse] = useState("");
-  const [content, setContent] = useState("");
-  const [contentTitle, setContentTitle] = useState("");
+const CourseContent = () => {
+    const [showBot, setShowBot] = React.useState(false);
+    const [course, setCourse] = useState('');
+    const [content, setContent] = useState('');
+    const [contentTitle, setContentTitle] = useState('');
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+    const router = useRouter();
 
-  const fetchData = async () => {
-    const result = await fetch(
-      "http://localhost:3000/api/content/64447b33f68eb82f01b7a3f6"
-    );
-    const json = await result.json();
-    setCourse(json);
-  };
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+    useEffect(() => {
+        fetchData();
+      }, []);
 
-  const regenerateContent = async (level) => {
-    const result = await fetch("http://localhost:3000/api/regenerate", {
-      method: "POST",
-      body: JSON.stringify({ content: content, level: level }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const json = await result.json();
-    if (json.text !== "") {
-      setContent(json.text);
+    const fetchData = async () => {
+        const result = await fetch(`http://localhost:3000/api/content/${router.query.id}`);
+        const json = await result.json();
+        setCourse(json);
+    };
+    
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
+    
+    const regenerateContent = async (level) => {
+        const result = await fetch('http://localhost:3000/api/regenerate', {
+            method: 'POST',
+            body: JSON.stringify({"content": content, "level":level }),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const json = await result.json();
+        if(json.text !== ""){
+            setContent(json.text);
+        }
+        toggleMenu()
+    };  
+
+    const summarizeContent = async () => {
+        const result = await fetch('http://localhost:3000/api/summarize', {
+            method: 'POST',
+            body: JSON.stringify({"prompt": content}),
+            headers: { 'Content-Type': 'application/json' }
+        });
+        const json = await result.json();
+        if(json.text !== ""){
+            setContent(json.text);
+        }
+        toggleMenu()
+    }; 
+
+    const regenerateFunction = async (level) => {
+        if(level === 'summarize'){
+            summarizeContent()
+        }else{
+            regenerateContent(level)
+        }
+
     }
-    toggleMenu();
-  };
+    
+    const [isHidden, setIsHidden] = useState(true);
 
-  const summarizeContent = async (level) => {
-    const result = await fetch("http://localhost:3000/api/summarize", {
-      method: "POST",
-      body: JSON.stringify({ prompt: content }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const json = await result.json();
-    if (json.text !== "") {
-      setContent(json.text);
-    }
-    toggleMenu();
-  };
-
-  const regenerateFunction = async (level) => {
-    if (level === "summarize") {
-    } else {
-      regenerateContent(level);
-    }
-  };
-
-  const [isHidden, setIsHidden] = useState(true);
-
-  //   const toggleHiddenClass = () => {
-  //     setIsHidden(!isHidden);
-  //   };
-
-  const [selectedTopic, setSelectedTopic] = useState(0);
+//   const toggleHiddenClass = () => {
+//     setIsHidden(!isHidden);
+//   };
+    
+const [selectedTopic, setSelectedTopic] = useState(0);
 
   function toggleDropdown(index) {
-    if (selectedTopic === index) {
-      setSelectedTopic(null);
-    } else {
-      setSelectedTopic(index);
-      // setIsHidden(!isHidden);
+    if(selectedTopic === index){
+        setSelectedTopic(null);
+    }else{
+    setSelectedTopic(index);
+    // setIsHidden(!isHidden);
     }
   }
 
   const [selectedMenuItem, setSelectedMenuItem] = useState(0);
 
-  //   let content = '';
-  //   let content_title = '';
-  function getContent() {
-    for (let i = 0; i < course.topics.length; i++) {
-      if (course.topics[i].id === selectedTopic) {
-        let courseSubTopics = course.topics[i].subTopics;
-        for (let j = 0; j < courseSubTopics.length; j++) {
-          if (courseSubTopics[j].id === selectedMenuItem) {
-            setContent(courseSubTopics[j].content);
-            setContentTitle(courseSubTopics[j].title);
-          }
+//   let content = '';
+//   let content_title = '';
+  function getContent(){
+    for(let i = 0; i< course.topics.length; i++){
+        if(course.topics[i].id === selectedTopic){
+            let courseSubTopics = course.topics[i].subTopics
+            for(let j = 0; j< courseSubTopics.length; j++){
+                if(courseSubTopics[j].id === selectedMenuItem){
+                    setContent(courseSubTopics[j].content);
+                    setContentTitle(courseSubTopics[j].title);
+                }
+            }
         }
-      }
     }
   }
 
@@ -280,12 +293,23 @@ const courseContent = () => {
               </div>
             </div>
           </div>
+          {showBot && <div className='fixed right-12 bottom-[114px]'>
+        <Chatbot
+        config={config}
+        messageParser={MessageParser}
+        actionProvider={ActionProvider}
+      />
+        </div>}
+
+        <div className='w-50 h-50 rounded-full bg-black p-4 fixed right-12 bottom-12 cursor-pointer' onClick={() => setShowBot(!showBot)}>
+          <FaRobot className='text-white text-3xl'/>
+        </div>
         </>
       ) : (
-        <p>Loading data...</p>
+        <LoadingAnimation/>
       )}
     </div>
   );
 };
 
-export default courseContent;
+export default CourseContent;

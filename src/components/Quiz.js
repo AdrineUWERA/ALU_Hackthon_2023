@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import LoadingAnimation from './UI/LoadingAnimation';
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import LoadingAnimation from './UI/LoadingAnimation';
 
 const QuizComponent = () => {
   const router = useRouter();
@@ -179,12 +180,12 @@ const QuizComponent = () => {
             You scored {score} out of {questions.length}
           </h1>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-              <a
-                href="/learn/courseContent"
+              <Link
+                href="/learn"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Back to content <span aria-hidden="true">←</span>
-              </a>
+              </Link>
             </div>
         </div>
       ) : (
