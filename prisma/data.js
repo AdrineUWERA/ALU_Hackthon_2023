@@ -1,18 +1,19 @@
- const courses = [
-    {
-        name: "AI",
-        topics: [
-            {
-                name: "Introduction to AI",
-                description: "...",
-                subTopics: [
-                    {
-                        title: "Definition of AI",
-                        content: "AI stands for Artificial Intelligence, and it refers to the development of computer systems that can perform tasks that typically require human intelligence, such as visual perception, speech recognition, decision-making, and language translation. AI involves the use of algorithms, statistical models, and data to enable machines to learn from experience and improve their performance over time. The goal of AI is to create intelligent machines that can reason, understand, learn, and adapt to new situations, thereby augmenting human capabilities and solving complex problems."
-                    },
-                    {
-                        title: "Brief history of AI",
-                        content: `The history of AI can be traced back to the mid-20th century when researchers began exploring the possibility of creating machines that could exhibit human-like intelligence. Here's a brief timeline of some of the key milestones in the history of AI:
+const courses = [
+  {
+    name: "AI",
+    topics: [
+      {
+        name: "Introduction to AI",
+        description: "...",
+        subTopics: [
+          {
+            title: "Definition of AI",
+            content:
+              "AI stands for Artificial Intelligence, and it refers to the development of computer systems that can perform tasks that typically require human intelligence, such as visual perception, speech recognition, decision-making, and language translation. AI involves the use of algorithms, statistical models, and data to enable machines to learn from experience and improve their performance over time. The goal of AI is to create intelligent machines that can reason, understand, learn, and adapt to new situations, thereby augmenting human capabilities and solving complex problems.",
+          },
+          {
+            title: "Brief history of AI",
+            content: `The history of AI can be traced back to the mid-20th century when researchers began exploring the possibility of creating machines that could exhibit human-like intelligence. Here's a brief timeline of some of the key milestones in the history of AI:
 
                         1950: Computer scientist Alan Turing proposed the Turing Test, a way to test a machine's ability to exhibit intelligent behavior indistinguishable from that of a human.
                         
@@ -26,11 +27,11 @@
                         
                         2000s-present: The development of deep learning algorithms and the availability of large datasets and powerful computing resources have led to significant breakthroughs in AI, including image and speech recognition, natural language processing, and game playing.
                         
-                        Today, AI is being applied in a variety of fields, including healthcare, finance, transportation, and entertainment, and its potential for transforming society is still being explored.`
-                    },
-                    {
-                        title: "Applications of AI",
-                        content: `
+                        Today, AI is being applied in a variety of fields, including healthcare, finance, transportation, and entertainment, and its potential for transforming society is still being explored.`,
+          },
+          {
+            title: "Applications of AI",
+            content: `
                         Artificial Intelligence (AI) has many applications across different industries and sectors. Here are some examples:
 
 Healthcare: AI is being used to improve healthcare outcomes by analyzing medical data and providing personalized treatment recommendations. AI-powered chatbots are also being used to improve patient engagement and provide 24/7 support.
@@ -48,19 +49,19 @@ Education: AI is being used in education to provide personalized learning experi
 Entertainment: AI is being used in the entertainment industry to personalize content recommendations, improve user engagement, and create more realistic virtual environments.
 
 These are just a few examples of the many applications of AI. As AI continues to evolve and become more sophisticated, it has the potential to transform many different industries and sectors in the future.
-                        `
-                    },
-                ]
-            },
-            {
-                name: "Machine Learning",
-                description: `
+                        `,
+          },
+        ],
+      },
+      {
+        name: "Machine Learning",
+        description: `
                 Machine Learning (ML) is a subfield of Artificial Intelligence (AI) that focuses on developing algorithms and statistical models that enable computer systems to learn and improve from experience without being explicitly programmed. In other words, ML algorithms use large amounts of data to "learn" patterns and relationships, and then use this knowledge to make predictions or decisions without being explicitly programmed to do so.
                 `,
-                subTopics: [
-                    {
-                        title: "Introduction to machine learning",
-                        content: `
+        subTopics: [
+          {
+            title: "Introduction to machine learning",
+            content: `
                         Machine learning (ML) is a branch of artificial intelligence (AI) that focuses on the development of algorithms and statistical models that enable computers to learn from and make predictions or decisions based on input data. The core idea of machine learning is to use data to automatically learn patterns, relationships, and insights without being explicitly programmed.
 
 The field of machine learning has grown significantly in recent years, due in part to the explosion of data and the development of more powerful computing hardware. Machine learning algorithms have been applied to a wide range of problems, from image and speech recognition to natural language processing, recommendation systems, fraud detection, and many more.
@@ -70,11 +71,11 @@ There are three main types of machine learning: supervised learning, unsupervise
 The process of building a machine learning model typically involves several steps, including data collection and preprocessing, feature extraction, model selection and training, and model evaluation and deployment. Machine learning models can be trained on a wide range of data types, including text, images, audio, and structured data.
 
 Overall, machine learning is a powerful tool for making sense of complex data and solving a wide range of problems. With the continued growth of data and the development of more powerful algorithms, the potential for machine learning to drive innovation and transform industries is only set to increase in the coming years.
-                        `
-                    },
-                    {
-                        title: "Supervised  learning",
-                        content: `
+                        `,
+          },
+          {
+            title: "Supervised  learning",
+            content: `
                         Supervised learning is a type of Machine Learning (ML) algorithm in which the model is trained using labeled data. Labeled data means that the input data is accompanied by the desired output or "label" for each example in the dataset. In other words, the algorithm is provided with a set of training data that includes both input and output data, and it learns to map the input data to the correct output based on this labeled data.
 
 The goal of supervised learning is to learn a mapping function from input variables to output variables based on a set of training examples. Once the mapping function is learned, it can be used to make predictions on new, unseen data.
@@ -94,12 +95,12 @@ Random forests: an ensemble learning technique that combines multiple decision t
 Support Vector Machines (SVMs): a classification algorithm that finds the optimal hyperplane that separates the classes in the input data.
 
 Supervised learning has many practical applications, such as image and speech recognition, natural language processing, recommendation systems, fraud detection, and many more.
-                        `
-                    },
-                   
-                    {
-                        title: "Unsupervised learning",
-                        content: `
+                        `,
+          },
+
+          {
+            title: "Unsupervised learning",
+            content: `
                         
                         Unsupervised learning is a type of Machine Learning (ML) algorithm in which the model is trained on unlabeled data, meaning that the input data is not accompanied by any desired output or "label". In unsupervised learning, the algorithm tries to identify patterns and relationships in the input data without being given any specific information about what it should be looking for.
 
@@ -116,24 +117,24 @@ Autoencoders: a neural network architecture that learns to encode and decode dat
 Generative Adversarial Networks (GANs): a type of deep learning model that can generate new data that is similar to the training data.
 
 Unsupervised learning has many practical applications, such as anomaly detection, data compression, exploratory data analysis, and many more. It is often used in combination with supervised learning to improve the performance of machine learning models, or to gain insights into the structure of complex datasets.
-                        `
-                    },
-                ]
-            },
-        ]
-    },
-    {
-        name: "Networking",
-        topics: [
-            {
-                name: "Introduction to Networking",
-                description: `
+                        `,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Networking",
+    topics: [
+      {
+        name: "Introduction to Networking",
+        description: `
                 Networking refers to the practice of connecting multiple devices together to enable communication and information sharing between them. The devices can include computers, smartphones, servers, routers, switches, and other electronic devices. A network can be created by connecting devices physically with cables, or wirelessly through a wireless access point.
                 `,
-                subTopics: [
-                    {
-                        title: "What is networking?",
-                        content: `
+        subTopics: [
+          {
+            title: "What is networking?",
+            content: `
                         Networking refers to the process of connecting multiple devices together to enable communication and information sharing between them. It involves the use of various hardware and software components to create a system that facilitates the exchange of data between different devices.
 
 A network can be created by connecting devices physically with cables, or wirelessly through a wireless access point. Once connected, devices can communicate with each other through a variety of protocols, such as the Internet Protocol (IP) or Transmission Control Protocol (TCP).
@@ -143,11 +144,11 @@ The purpose of networking is to enable communication and sharing of resources be
 Networking is a complex field that involves various protocols, standards, and technologies. Some of the key components of networking include network topologies, network protocols, network architecture, and network security. The field of networking is constantly evolving, with new technologies and protocols being developed to meet the changing needs of users and businesses.
 
 Overall, networking is an essential component of modern technology and plays a critical role in many industries, including telecommunications, banking, healthcare, and entertainment. It enables people to connect with each other and share information across the world, making it a fundamental part of our daily lives.
-                        `
-                    },
-                    {
-                        title: "Types of networks",
-                        content: `
+                        `,
+          },
+          {
+            title: "Types of networks",
+            content: `
                         There are several types of networks, each with its own advantages and disadvantages. Some of the most common types of networks include:
 
 Local Area Network (LAN): A LAN is a network that connects devices within a small geographic area, such as a home, office, or school. LANs are typically used to share resources, such as printers and files, and to provide internet access to multiple devices.
@@ -166,11 +167,11 @@ Peer-to-Peer Network (P2P): A P2P network is a decentralized network that allows
 
 Each type of network has its own unique characteristics, and the choice of network type depends on factors such as the size of the network, the type of devices being connected, and the intended use of the network.
                         
-                        `
-                    },
-                    {
-                        title: "Network topologies",
-                        content: `
+                        `,
+          },
+          {
+            title: "Network topologies",
+            content: `
                         Network topology refers to the physical or logical arrangement of devices in a network. There are several different types of network topologies, each with its own advantages and disadvantages. Some of the most common network topologies include:
 
 Bus Topology: In a bus topology, all devices in the network are connected to a single cable called a backbone. Data is transmitted along the backbone to all devices on the network. Bus topologies are easy to set up and inexpensive, but they can be slow and are not very secure.
@@ -184,13 +185,13 @@ Mesh Topology: In a mesh topology, all devices in the network are connected to e
 Tree Topology: In a tree topology, devices in the network are arranged in a hierarchical structure, with multiple levels of branching. Data is transmitted from one device to another through the branches of the tree. Tree topologies are scalable and provide good performance, but they can be difficult to manage and are vulnerable to failures at the root node.
 
 Each type of network topology has its own strengths and weaknesses, and the choice of topology depends on factors such as the size of the network, the type of devices being connected, and the intended use of the network.
-                        `
-                    },
-                ]
-            },
-            {
-                name: "Physical Layer",
-                description: `
+                        `,
+          },
+        ],
+      },
+      {
+        name: "Physical Layer",
+        description: `
                 The physical layer is the first layer in the OSI (Open Systems Interconnection) model of computer networking. It is responsible for transmitting raw bits over a communication channel, and it deals with the electrical, mechanical, and timing characteristics of the transmission medium. The physical layer is responsible for converting the data that is sent from the upper layers of the OSI model into a form that can be transmitted over a physical communication medium, such as copper wires, fiber-optic cables, or radio waves.
 
 The physical layer is concerned with the following aspects of network communication:
@@ -207,10 +208,10 @@ Error detection and correction: The physical layer may include mechanisms for de
 
 In summary, the physical layer is responsible for converting the data into a form that can be transmitted over the physical medium, and ensuring that the data is transmitted and received correctly. It is a critical component of the OSI model and is essential for reliable communication over a network.
                 `,
-                subTopics: [
-                    {
-                        title: "Introduction to the physical layer",
-                        content: `
+        subTopics: [
+          {
+            title: "Introduction to the physical layer",
+            content: `
                         The physical layer is the first layer in the OSI (Open Systems Interconnection) model of computer networking. It is responsible for the transmission and reception of unstructured raw data over a communication channel, and it deals with the electrical, mechanical, and timing characteristics of the transmission medium.
 
 The physical layer defines the physical characteristics of the communication channel, such as the type of cable or wireless medium, the pinout of connectors, and the voltage and frequency specifications. It also specifies the protocols used to transmit data over the physical medium, such as modulation techniques and line coding schemes.
@@ -230,11 +231,11 @@ Noise reduction: The physical layer may include mechanisms for reducing noise an
 Bit synchronization: The physical layer ensures that the transmitter and receiver are synchronized so that data is correctly received and interpreted.
 
 In summary, the physical layer is responsible for the transmission and reception of unstructured raw data over a communication channel. It defines the physical and electrical characteristics of the transmission medium, encodes data into signals that can be transmitted, and ensures that the signals are correctly received and interpreted.
-                        `
-                    },
-                    {
-                        title: "Networking cables and connectors",
-                        content: `
+                        `,
+          },
+          {
+            title: "Networking cables and connectors",
+            content: `
                         Networking cables and connectors are essential components of a network infrastructure, as they provide the physical medium for data transmission between devices. Here are some of the most common networking cables and connectors:
 
 Ethernet cable: Ethernet cables are the most common type of networking cable used in wired networks. They are typically made of twisted pair copper wire and come in different categories (Cat5e, Cat6, Cat7) which determine their data transfer speeds and maximum distance.
@@ -252,11 +253,11 @@ BNC connector: BNC (Bayonet Neill-Concelman) connectors are used in coaxial cabl
 USB cable: USB (Universal Serial Bus) cables are used to connect devices to computers and other devices. They are commonly used for printers, scanners, and external hard drives.
 
 In summary, networking cables and connectors are essential for transmitting data between devices in a network. Ethernet and fiber optic cables are the most common types of networking cables, while RJ-45, fiber optic, and BNC connectors are commonly used to connect these cables to devices.
-                        `
-                    },
-                    {
-                        title: "Network topologies and media",
-                        content: `
+                        `,
+          },
+          {
+            title: "Network topologies and media",
+            content: `
                         Network topology refers to the arrangement of devices and their interconnections in a network. The topology of a network determines how data is transmitted between devices and how devices communicate with each other. There are several types of network topologies, including:
 
 Bus Topology: In this topology, all devices are connected to a common cable called a bus. Data is transmitted from one device to another in a linear fashion, and each device listens for data intended for it.
@@ -276,12 +277,12 @@ Fiber optic cable: Fiber optic cables use light to transmit data over long dista
 Wireless: Wireless networks use radio waves to transmit data between devices. They are convenient and flexible but can be subject to interference and signal degradation.
 
 In summary, network topology refers to the arrangement of devices and their interconnections in a network, while network media refers to the type of physical medium used to transmit data between devices. The choice of topology and media can have a significant impact on network performance, reliability, and scalability.
-                        `
-                    },
-                ]
-            },
-        ]
-    },
-]
+                        `,
+          },
+        ],
+      },
+    ],
+  },
+];
 
-module.exports = {courses}
+module.exports = { courses };
