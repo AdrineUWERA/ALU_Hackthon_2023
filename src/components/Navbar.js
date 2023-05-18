@@ -9,7 +9,7 @@ const NavBar = () => {
         aria-label="Global"
       >
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <a href="" className="-m-1.5 p-1.5">
             <Image className="h-8 w-auto" height={30} width={50} src="/images/logo.png" alt="Logo"/>
           </a>
           <span className="text-xl ml-4 text-center font-bold tracking-tight sm:text-2xl text-indigo-600">InterLearn</span>

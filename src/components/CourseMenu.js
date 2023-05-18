@@ -6,14 +6,14 @@ const CourseMenu = () => {
       title: "Artificial intelligence",
       description:
         "AI is the simulation of human intelligence in machines that can perform tasks that normally require human-level intelligence such as decision-making and make predictions.",
-        link: "64447b33f68eb82f01b7a3f6"
+        link: "646653b53bd72faa30321b1f"
     },
     {
       image: "/images/networks.jpeg",
       title: "Networks",
       description:
         "Networks refer to the interconnected communication systems that allow devices to exchange information and resources, including the internet and other computer networks.",
-        link: "64447b35f68eb82f01b7a3ff" 
+        link: "646653b83bd72faa30321b28" 
     },
     {
       image: "/images/cloud.jpg",

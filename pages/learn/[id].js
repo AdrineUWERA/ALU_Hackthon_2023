@@ -24,9 +24,14 @@ const CourseContent = () => {
       }, []);
 
     const fetchData = async () => {
+      try{
         const result = await fetch(`http://localhost:3000/api/content/${router.query.id}`);
         const json = await result.json();
         setCourse(json);
+        console.log(json)
+      } catch(err){
+        console.log(err);
+      }
     };
     
     const [isMenuOpen, setIsMenuOpen] = useState(false);
